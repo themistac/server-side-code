@@ -1,0 +1,2 @@
+<a href="/?p=299&amp;k=display-deal-special-offer"><img src="/images/common/comet-deal-block.jpg" alt="Display deal - everything you need in one box!" title="Display deal - everything you need in one box!" style="display:block; margin-bottom:10px;" /></a>
+<a href="/cipd/"><img src="/images/cipd/cipd-home-block.jpg" alt="Exclusive competition for CIPD members" title="Exclusive competition for CIPD members" style="display:block; margin-bottom:10px;" /></a>

@@ -1,0 +1,1 @@
+<a href="/cipd/"><img src="/images/cipd/cipd-home-block.jpg" alt="Exclusive competition for CIPD members" title="Exclusive competition for CIPD members" style="display:block; margin-bottom:10px;" /></a>
