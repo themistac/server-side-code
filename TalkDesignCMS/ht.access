@@ -1,0 +1,89 @@
+# Turn the RewriteEngine on
+
+RewriteEngine on
+#RewriteBase /
+
+#RewriteCond %{HTTP_USER_AGENT} iPhone
+#RewriteRule .* http://app.talkdesignandprint.com/ [R]
+
+#RewriteCond %{HTTP_USER_AGENT} .*iPhone.*
+#RewriteRule ^/index\.php$ /index-iphone-ajax.php [L]
+
+###################################################
+# Add a leading www to domain if one is missing.  #
+###################################################
+# If this rule is used, the rewriting stops here  #
+# and then restarts from the beginning with the   #
+# new URL                                         #
+###################################################
+
+RewriteCond %{HTTP_HOST} !^www\.
+RewriteRule ^(.*)$ http://www.%{HTTP_HOST}/$1 [R=301,L]
+
+###################################################
+# Do not process images or CSS files further      #
+###################################################
+# No more processing occurs if this rule is       #
+# successful                                      #
+###################################################
+
+RewriteRule \.(css|jpe?g|gif|png)$ - [L]
+
+###################################################
+# Add a trailing slash if needed                  #
+###################################################
+# If this rule is used, the rewriting stops here  #
+# and then restarts from the beginning with the   #
+# new URL                                         #
+###################################################
+
+RewriteCond %{REQUEST_URI} ^/[^\.]+[^/]$
+RewriteRule ^(.*)$ http://%{HTTP_HOST}/$1/ [R=301,L]
+
+###################################################
+# Rewrite web pages to one master page            #
+###################################################
+# /somepage/            => master.php             #
+#                            ?page=somepage       #
+# /somesection/somepage => master.php             #
+#                            ?section=somesection #
+#                            &page=somepage       #
+# /somesection/somesub/somepage/                  #
+#                       => master.php             #
+#                            ?section=somesection #
+#                            &subsection=somesub  #
+#                            &page=somepage       #
+###################################################
+# Variables are accessed in PHP using             #
+# $_GET['section'], $_GET['subsection'] and       #
+# $_GET['page']                                   #
+###################################################
+# No more processing occurs if any of these rules #
+# are successful                                  #
+###################################################
+
+RewriteRule ^([^/\.]+)/([^/\.]+)/?$ /index.php?p=$1&k=$2 [L]
+
+RewriteCond %{REQUEST_URI} !^/?images/
+RewriteCond %{REQUEST_URI} !^/?css/
+RewriteCond %{REQUEST_URI} !^/?news/
+RewriteCond %{REQUEST_URI} !^/?egghunt/
+RewriteCond %{REQUEST_URI} !^/?quote/
+RewriteCond %{REQUEST_URI} !^/?spotthedifference/
+RewriteCond %{REQUEST_URI} !^/?apps/
+RewriteCond %{REQUEST_URI} !^/?apps/cms/
+RewriteCond %{REQUEST_URI} !^/?apps/cms/login/
+RewriteCond %{REQUEST_URI} !^/?clients/
+RewriteCond %{REQUEST_URI} !^/?christmas/
+RewriteCond %{REQUEST_URI} !^/?valentine/
+RewriteCond %{REQUEST_URI} !^/?manager/
+RewriteCond %{REQUEST_URI} !^/?core/
+RewriteRule ^([^/\.]+)/?$ /index.php?p=$1 [L]
+RewriteRule ^([^/\.]+)/([^/\.]+)/?$ /index.php?p=$1 [L]
+RewriteRule ^([^/\.]+)/([^/\.]+)/([^/\.]+)/?$ /index.php?p=$1 [L]
+AuthName "Talk Design & Print"
+AuthUserFile "/home/talkde39/.htpasswds/public_html/passwd"
+
+RewriteCond %{HTTP_REFERER} !^$
+
+RewriteRule .*\.(jpg|jpeg|gif|png|bmp|pdf)$ - [F,NC]
